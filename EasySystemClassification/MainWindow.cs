@@ -72,9 +72,9 @@ namespace EasySystemClassification
                     nodeRowCount += ExportData(curNode.Nodes, curColumn + 1, startRow);
                 }
                 totalRowCount += nodeRowCount;
-                _excel.UniteCells(_curSheet, startRow, curColumn, startRow + totalRowCount - 1, curColumn);
+                _excel.UniteCells(_curSheet, startRow, curColumn, startRow + nodeRowCount - 1, curColumn);
                 _excel.SetCellValue(_curSheet, startRow, curColumn, curNode.Text);
-                startRow += totalRowCount;
+                startRow += nodeRowCount;
             }
             return totalRowCount;
         }

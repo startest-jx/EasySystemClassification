@@ -62,7 +62,6 @@
             this.txtCatalogName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSheetRename = new System.Windows.Forms.Button();
             this.cbSheets = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.gbCatalog.SuspendLayout();
@@ -160,24 +159,28 @@
             this.miNewChildCatalog.Name = "miNewChildCatalog";
             this.miNewChildCatalog.Size = new System.Drawing.Size(164, 22);
             this.miNewChildCatalog.Text = "新增子目录(&C)";
+            this.miNewChildCatalog.Click += new System.EventHandler(this.NewChildCatalog);
             // 
             // miNewBrotherCatalog
             // 
             this.miNewBrotherCatalog.Name = "miNewBrotherCatalog";
             this.miNewBrotherCatalog.Size = new System.Drawing.Size(164, 22);
             this.miNewBrotherCatalog.Text = "新增同级目录(&B)";
+            this.miNewBrotherCatalog.Click += new System.EventHandler(this.NewBrotherCatalog);
             // 
             // miUpdateCatalog
             // 
             this.miUpdateCatalog.Name = "miUpdateCatalog";
             this.miUpdateCatalog.Size = new System.Drawing.Size(164, 22);
             this.miUpdateCatalog.Text = "更新目录(&U)";
+            this.miUpdateCatalog.Click += new System.EventHandler(this.UpdateCatalog);
             // 
             // miDeleteCatalog
             // 
             this.miDeleteCatalog.Name = "miDeleteCatalog";
             this.miDeleteCatalog.Size = new System.Drawing.Size(164, 22);
             this.miDeleteCatalog.Text = "删除目录(&D)";
+            this.miDeleteCatalog.Click += new System.EventHandler(this.DeleteCatalog);
             // 
             // toolStripMenuItem3
             // 
@@ -346,7 +349,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnSheetRename);
             this.groupBox1.Controls.Add(this.cbSheets);
             this.groupBox1.Location = new System.Drawing.Point(481, 28);
             this.groupBox1.Name = "groupBox1";
@@ -355,22 +357,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "工作表";
             // 
-            // btnSheetRename
-            // 
-            this.btnSheetRename.Location = new System.Drawing.Point(209, 17);
-            this.btnSheetRename.Name = "btnSheetRename";
-            this.btnSheetRename.Size = new System.Drawing.Size(58, 23);
-            this.btnSheetRename.TabIndex = 2;
-            this.btnSheetRename.Text = "更名";
-            this.btnSheetRename.UseVisualStyleBackColor = true;
-            // 
             // cbSheets
             // 
             this.cbSheets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSheets.FormattingEnabled = true;
-            this.cbSheets.Location = new System.Drawing.Point(6, 19);
+            this.cbSheets.Location = new System.Drawing.Point(19, 19);
             this.cbSheets.Name = "cbSheets";
-            this.cbSheets.Size = new System.Drawing.Size(197, 20);
+            this.cbSheets.Size = new System.Drawing.Size(236, 20);
             this.cbSheets.TabIndex = 1;
             // 
             // MainWindow
@@ -428,7 +421,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cbSheets;
-        private System.Windows.Forms.Button btnSheetRename;
         private System.Windows.Forms.ToolStripMenuItem miNewBrotherCatalog;
         private System.Windows.Forms.Button btnUpdateCatalog;
         private System.Windows.Forms.Button btnDeleteCatalog;
