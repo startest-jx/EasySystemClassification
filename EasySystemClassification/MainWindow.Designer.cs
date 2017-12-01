@@ -50,7 +50,8 @@
             this.miOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.gbCatalog = new System.Windows.Forms.GroupBox();
             this.trCatalog = new System.Windows.Forms.TreeView();
-            this.gbDetail = new System.Windows.Forms.GroupBox();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnDeleteCatalog = new System.Windows.Forms.Button();
             this.btnNewBrotherCatalog = new System.Windows.Forms.Button();
             this.btnNewChildCatalog = new System.Windows.Forms.Button();
@@ -63,10 +64,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbSheets = new System.Windows.Forms.ComboBox();
+            this.btnPrevious = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.gbDetail = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.gbOperator = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtWholeCode = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.gbCatalog.SuspendLayout();
-            this.gbDetail.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.btnPrevious.SuspendLayout();
+            this.gbDetail.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.gbOperator.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -77,7 +92,7 @@
             this.mnuTool});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(763, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(999, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -98,45 +113,45 @@
             // miNew
             // 
             this.miNew.Name = "miNew";
-            this.miNew.Size = new System.Drawing.Size(118, 22);
+            this.miNew.Size = new System.Drawing.Size(152, 22);
             this.miNew.Text = "新建(&N)";
             this.miNew.Click += new System.EventHandler(this.NewFile);
             // 
             // miImport
             // 
             this.miImport.Name = "miImport";
-            this.miImport.Size = new System.Drawing.Size(118, 22);
+            this.miImport.Size = new System.Drawing.Size(152, 22);
             this.miImport.Text = "导入(&I)";
             this.miImport.Click += new System.EventHandler(this.ImportFile);
             // 
             // miExport
             // 
             this.miExport.Name = "miExport";
-            this.miExport.Size = new System.Drawing.Size(118, 22);
+            this.miExport.Size = new System.Drawing.Size(152, 22);
             this.miExport.Text = "导出(&O)";
             this.miExport.Click += new System.EventHandler(this.ExportFile);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(115, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // miClose
             // 
             this.miClose.Name = "miClose";
-            this.miClose.Size = new System.Drawing.Size(118, 22);
+            this.miClose.Size = new System.Drawing.Size(152, 22);
             this.miClose.Text = "关闭(&C)";
             this.miClose.Click += new System.EventHandler(this.CloseFile);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(115, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(118, 22);
+            this.miExit.Size = new System.Drawing.Size(152, 22);
             this.miExit.Text = "退出(&X)";
             // 
             // mnuEdit
@@ -209,21 +224,23 @@
             this.mnuTool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miOptions});
             this.mnuTool.Name = "mnuTool";
-            this.mnuTool.Size = new System.Drawing.Size(62, 21);
-            this.mnuTool.Text = "工具(&O)";
+            this.mnuTool.Size = new System.Drawing.Size(59, 21);
+            this.mnuTool.Text = "工具(&T)";
             // 
             // miOptions
             // 
             this.miOptions.Name = "miOptions";
-            this.miOptions.Size = new System.Drawing.Size(118, 22);
+            this.miOptions.Size = new System.Drawing.Size(152, 22);
             this.miOptions.Text = "选项(&O)";
+            this.miOptions.Click += new System.EventHandler(this.OpenOptions);
             // 
             // gbCatalog
             // 
             this.gbCatalog.Controls.Add(this.trCatalog);
-            this.gbCatalog.Location = new System.Drawing.Point(12, 28);
+            this.gbCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbCatalog.Location = new System.Drawing.Point(0, 0);
             this.gbCatalog.Name = "gbCatalog";
-            this.gbCatalog.Size = new System.Drawing.Size(463, 338);
+            this.gbCatalog.Size = new System.Drawing.Size(712, 521);
             this.gbCatalog.TabIndex = 1;
             this.gbCatalog.TabStop = false;
             this.gbCatalog.Text = "分类目录";
@@ -233,32 +250,30 @@
             this.trCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trCatalog.Location = new System.Drawing.Point(3, 17);
             this.trCatalog.Name = "trCatalog";
-            this.trCatalog.Size = new System.Drawing.Size(457, 318);
+            this.trCatalog.Size = new System.Drawing.Size(706, 501);
             this.trCatalog.TabIndex = 0;
             this.trCatalog.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CheckCatalog);
             // 
-            // gbDetail
+            // txtCode
             // 
-            this.gbDetail.Controls.Add(this.btnDeleteCatalog);
-            this.gbDetail.Controls.Add(this.btnNewBrotherCatalog);
-            this.gbDetail.Controls.Add(this.btnNewChildCatalog);
-            this.gbDetail.Controls.Add(this.btnUpdateCatalog);
-            this.gbDetail.Controls.Add(this.txtCatalogLevel);
-            this.gbDetail.Controls.Add(this.label4);
-            this.gbDetail.Controls.Add(this.txtParentCatalog);
-            this.gbDetail.Controls.Add(this.label2);
-            this.gbDetail.Controls.Add(this.txtCatalogName);
-            this.gbDetail.Controls.Add(this.label1);
-            this.gbDetail.Location = new System.Drawing.Point(481, 86);
-            this.gbDetail.Name = "gbDetail";
-            this.gbDetail.Size = new System.Drawing.Size(273, 280);
-            this.gbDetail.TabIndex = 2;
-            this.gbDetail.TabStop = false;
-            this.gbDetail.Text = "目录详情";
+            this.txtCode.Location = new System.Drawing.Point(83, 53);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(173, 21);
+            this.txtCode.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "物料编码:";
             // 
             // btnDeleteCatalog
             // 
-            this.btnDeleteCatalog.Location = new System.Drawing.Point(142, 239);
+            this.btnDeleteCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeleteCatalog.Location = new System.Drawing.Point(143, 342);
             this.btnDeleteCatalog.Name = "btnDeleteCatalog";
             this.btnDeleteCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnDeleteCatalog.TabIndex = 10;
@@ -268,7 +283,8 @@
             // 
             // btnNewBrotherCatalog
             // 
-            this.btnNewBrotherCatalog.Location = new System.Drawing.Point(142, 207);
+            this.btnNewBrotherCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewBrotherCatalog.Location = new System.Drawing.Point(143, 313);
             this.btnNewBrotherCatalog.Name = "btnNewBrotherCatalog";
             this.btnNewBrotherCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnNewBrotherCatalog.TabIndex = 9;
@@ -278,7 +294,8 @@
             // 
             // btnNewChildCatalog
             // 
-            this.btnNewChildCatalog.Location = new System.Drawing.Point(19, 207);
+            this.btnNewChildCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewChildCatalog.Location = new System.Drawing.Point(20, 313);
             this.btnNewChildCatalog.Name = "btnNewChildCatalog";
             this.btnNewChildCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnNewChildCatalog.TabIndex = 8;
@@ -289,7 +306,8 @@
             // 
             // btnUpdateCatalog
             // 
-            this.btnUpdateCatalog.Location = new System.Drawing.Point(19, 239);
+            this.btnUpdateCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUpdateCatalog.Location = new System.Drawing.Point(20, 342);
             this.btnUpdateCatalog.Name = "btnUpdateCatalog";
             this.btnUpdateCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnUpdateCatalog.TabIndex = 6;
@@ -299,7 +317,7 @@
             // 
             // txtCatalogLevel
             // 
-            this.txtCatalogLevel.Location = new System.Drawing.Point(82, 71);
+            this.txtCatalogLevel.Location = new System.Drawing.Point(83, 113);
             this.txtCatalogLevel.Name = "txtCatalogLevel";
             this.txtCatalogLevel.ReadOnly = true;
             this.txtCatalogLevel.Size = new System.Drawing.Size(173, 21);
@@ -308,7 +326,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 74);
+            this.label4.Location = new System.Drawing.Point(18, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 4;
@@ -316,7 +334,7 @@
             // 
             // txtParentCatalog
             // 
-            this.txtParentCatalog.Location = new System.Drawing.Point(82, 122);
+            this.txtParentCatalog.Location = new System.Drawing.Point(83, 143);
             this.txtParentCatalog.Name = "txtParentCatalog";
             this.txtParentCatalog.ReadOnly = true;
             this.txtParentCatalog.Size = new System.Drawing.Size(173, 21);
@@ -325,7 +343,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 125);
+            this.label2.Location = new System.Drawing.Point(18, 146);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 2;
@@ -333,7 +351,7 @@
             // 
             // txtCatalogName
             // 
-            this.txtCatalogName.Location = new System.Drawing.Point(82, 23);
+            this.txtCatalogName.Location = new System.Drawing.Point(83, 23);
             this.txtCatalogName.Name = "txtCatalogName";
             this.txtCatalogName.Size = new System.Drawing.Size(173, 21);
             this.txtCatalogName.TabIndex = 1;
@@ -341,7 +359,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 26);
+            this.label1.Location = new System.Drawing.Point(18, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 12);
             this.label1.TabIndex = 0;
@@ -350,9 +368,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cbSheets);
-            this.groupBox1.Location = new System.Drawing.Point(481, 28);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 74);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(273, 51);
+            this.groupBox1.Size = new System.Drawing.Size(280, 51);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "工作表";
@@ -361,29 +380,149 @@
             // 
             this.cbSheets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSheets.FormattingEnabled = true;
-            this.cbSheets.Location = new System.Drawing.Point(19, 19);
+            this.cbSheets.Location = new System.Drawing.Point(6, 19);
             this.cbSheets.Name = "cbSheets";
-            this.cbSheets.Size = new System.Drawing.Size(236, 20);
+            this.cbSheets.Size = new System.Drawing.Size(267, 20);
             this.cbSheets.TabIndex = 1;
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Controls.Add(this.button2);
+            this.btnPrevious.Controls.Add(this.btnNext);
+            this.btnPrevious.Controls.Add(this.txtSearch);
+            this.btnPrevious.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPrevious.Location = new System.Drawing.Point(3, 17);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(280, 57);
+            this.btnPrevious.TabIndex = 4;
+            this.btnPrevious.TabStop = false;
+            this.btnPrevious.Text = "查找目录";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(214, 17);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(59, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "上一个";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.SearchPrevious);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(149, 17);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(59, 23);
+            this.btnNext.TabIndex = 1;
+            this.btnNext.Text = "下一个";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.SearchNext);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(6, 19);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(137, 21);
+            this.txtSearch.TabIndex = 0;
+            // 
+            // gbDetail
+            // 
+            this.gbDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbDetail.Controls.Add(this.txtWholeCode);
+            this.gbDetail.Controls.Add(this.txtCode);
+            this.gbDetail.Controls.Add(this.btnNewChildCatalog);
+            this.gbDetail.Controls.Add(this.label5);
+            this.gbDetail.Controls.Add(this.label3);
+            this.gbDetail.Controls.Add(this.label1);
+            this.gbDetail.Controls.Add(this.btnDeleteCatalog);
+            this.gbDetail.Controls.Add(this.txtCatalogName);
+            this.gbDetail.Controls.Add(this.btnNewBrotherCatalog);
+            this.gbDetail.Controls.Add(this.label2);
+            this.gbDetail.Controls.Add(this.txtParentCatalog);
+            this.gbDetail.Controls.Add(this.btnUpdateCatalog);
+            this.gbDetail.Controls.Add(this.label4);
+            this.gbDetail.Controls.Add(this.txtCatalogLevel);
+            this.gbDetail.Location = new System.Drawing.Point(3, 134);
+            this.gbDetail.Name = "gbDetail";
+            this.gbDetail.Size = new System.Drawing.Size(283, 384);
+            this.gbDetail.TabIndex = 13;
+            this.gbDetail.TabStop = false;
+            this.gbDetail.Text = "目录详情";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.gbCatalog);
+            this.panel1.Location = new System.Drawing.Point(287, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(712, 521);
+            this.panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.gbOperator);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(286, 521);
+            this.panel2.TabIndex = 4;
+            // 
+            // gbOperator
+            // 
+            this.gbOperator.Controls.Add(this.gbDetail);
+            this.gbOperator.Controls.Add(this.groupBox1);
+            this.gbOperator.Controls.Add(this.btnPrevious);
+            this.gbOperator.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbOperator.Location = new System.Drawing.Point(0, 0);
+            this.gbOperator.Name = "gbOperator";
+            this.gbOperator.Size = new System.Drawing.Size(286, 521);
+            this.gbOperator.TabIndex = 1;
+            this.gbOperator.TabStop = false;
+            this.gbOperator.Text = "操作";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 12);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "总编码:";
+            // 
+            // txtWholeCode
+            // 
+            this.txtWholeCode.Location = new System.Drawing.Point(83, 83);
+            this.txtWholeCode.Name = "txtWholeCode";
+            this.txtWholeCode.ReadOnly = true;
+            this.txtWholeCode.Size = new System.Drawing.Size(173, 21);
+            this.txtWholeCode.TabIndex = 12;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 379);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gbDetail);
-            this.Controls.Add(this.gbCatalog);
+            this.ClientSize = new System.Drawing.Size(999, 546);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "MainWindow";
             this.Text = "体系分类快速工具";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbCatalog.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.btnPrevious.ResumeLayout(false);
+            this.btnPrevious.PerformLayout();
             this.gbDetail.ResumeLayout(false);
             this.gbDetail.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.gbOperator.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,7 +549,6 @@
         private System.Windows.Forms.ToolStripMenuItem miOptions;
         private System.Windows.Forms.GroupBox gbCatalog;
         private System.Windows.Forms.TreeView trCatalog;
-        private System.Windows.Forms.GroupBox gbDetail;
         private System.Windows.Forms.TextBox txtParentCatalog;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCatalogName;
@@ -426,6 +564,18 @@
         private System.Windows.Forms.Button btnDeleteCatalog;
         private System.Windows.Forms.Button btnNewBrotherCatalog;
         private System.Windows.Forms.Button btnNewChildCatalog;
+        private System.Windows.Forms.GroupBox btnPrevious;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox gbDetail;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox gbOperator;
+        private System.Windows.Forms.TextBox txtWholeCode;
+        private System.Windows.Forms.Label label5;
     }
 }
 
