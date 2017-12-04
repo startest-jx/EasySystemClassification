@@ -11,6 +11,7 @@ namespace EasySystemClassification
     class OptionsHelper
     {
         private readonly string _fileName;
+        public Option Option;
 
         public bool FileExist => File.Exists(_fileName);
 
@@ -21,11 +22,16 @@ namespace EasySystemClassification
             {
                 CreateOptionsTemplate();
             }
+            else
+            {
+                Read(out var readString);
+                Deserialze(readString);
+            }
         }
 
-        public void CreateOptionsTemplate()
+        public bool CreateOptionsTemplate()
         {
-            var optionTemplate = new Option
+            Option = new Option
             {
                 ImportOption = new Option.ImportOptionClass
                 {
@@ -41,15 +47,48 @@ namespace EasySystemClassification
                     ExportFormat = @"%NAME%$%CODE%"
                 }
             };
-            string jsonStr = JsonConvert.SerializeObject(optionTemplate);
-            Write(jsonStr);
+            string jsonStr = Serialize();
+            return Write(jsonStr);
         }
 
-        public void Write(string str)
+        public string Serialize()
         {
-            FileStream jsonFile = new FileStream(_fileName, FileMode.Create);
-            byte[] data = Encoding.Default.GetBytes(str);
-            jsonFile.Write(data, 0, data.Length);
+            return JsonConvert.SerializeObject(Option);
+        }
+
+        public void Deserialze(string json)
+        {
+            Option = JsonConvert.DeserializeObject<Option>(json);
+        }
+
+        public bool Write(string str)
+        {
+            try
+            {
+                FileStream jsonFile = new FileStream(_fileName, FileMode.Create);
+                byte[] data = Encoding.Default.GetBytes(str);
+                jsonFile.Write(data, 0, data.Length);
+                jsonFile.Flush();
+                jsonFile.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool Save()
+        {
+            return Write(Serialize());
+        }
+
+        public void Read(out string str)
+        {
+            FileStream jsonFile = new FileStream(_fileName, FileMode.Open);
+            byte[] data = new byte[jsonFile.Length];
+            jsonFile.Read(data, 0, data.Length);
+            str = Encoding.Default.GetString(data);
             jsonFile.Flush();
             jsonFile.Close();
         }

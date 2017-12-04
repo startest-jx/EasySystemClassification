@@ -22,8 +22,6 @@ namespace EasySystemClassification
         private string _curKeyWord;
         private List<TreeNode> _searchResult;
         private TreeNode _curSearchNode;
-        private long _importStartRow, _importStartColumn;
-        private long _exportStartRow, _exportStartColumn;
         private string _nameRegex = @".+(?=\$)";
         private string _codeRegex = @"(?<=\$)(\w+)";
         private string _cellFormat = @"%NAME%$%CODE%";
@@ -31,8 +29,6 @@ namespace EasySystemClassification
         public MainWindow()
         {
             InitializeComponent();
-            _optionsHelper = new OptionsHelper("Config.json");
-            DetailDisable();
         }
 
         private void ImportData(TreeNodeCollection curTree, long curColumn, long startRow, long endRow)
@@ -135,10 +131,12 @@ namespace EasySystemClassification
             txtCatalogLevel.Enabled = true;
             txtParentCatalog.Enabled = true;
 
-            btnNewChildCatalog.Enabled = true;
-            btnNewBrotherCatalog.Enabled = true;
-            btnUpdateCatalog.Enabled = true;
-            btnDeleteCatalog.Enabled = true;
+            btnNewChildCatalog.Enabled = miNewChildCatalog.Enabled = true;
+            btnNewBrotherCatalog.Enabled = miNewBrotherCatalog.Enabled = true;
+            btnUpdateCatalog.Enabled = miUpdateCatalog.Enabled = true;
+            btnDeleteCatalog.Enabled = miDeleteCatalog.Enabled = true;
+
+            
         }
 
         private void DetailDisable()
@@ -155,10 +153,10 @@ namespace EasySystemClassification
             txtCatalogLevel.Enabled = false;
             txtParentCatalog.Enabled = false;
 
-            btnNewChildCatalog.Enabled = false;
-            btnNewBrotherCatalog.Enabled = false;
-            btnUpdateCatalog.Enabled = false;
-            btnDeleteCatalog.Enabled = false;
+            btnNewChildCatalog.Enabled = miNewChildCatalog.Enabled = false;
+            btnNewBrotherCatalog.Enabled = miNewBrotherCatalog.Enabled = false;
+            btnUpdateCatalog.Enabled = miUpdateCatalog.Enabled = false;
+            btnDeleteCatalog.Enabled = miDeleteCatalog.Enabled = false;
         }
 
         private void NewFile(object sender, EventArgs e)
@@ -188,7 +186,9 @@ namespace EasySystemClassification
             _curSheet = _sheets[0];
             cbSheets.DataSource = _sheets;
             cbSheets.SelectedIndex = 0;
-            ImportData(trCatalog.Nodes, 1, 2, _excel.MaxUsedRowCount(_curSheet));
+            ImportData(trCatalog.Nodes, _optionsHelper.Option.ImportOption.StartColumn,
+                _optionsHelper.Option.ImportOption.StartRow,
+                _excel.MaxUsedRowCount(_curSheet));
             _excel.Close();
         }
 
@@ -210,7 +210,8 @@ namespace EasySystemClassification
             if (sfd.ShowDialog() != DialogResult.OK) return;
             _curFileName = sfd.FileName;
             NewFile(null, null);
-            ExportData(trCatalog.Nodes, 1, 2);
+            ExportData(trCatalog.Nodes, _optionsHelper.Option.ExportOption.StartColumn,
+                _optionsHelper.Option.ExportOption.StartRow);
             _excel.SaveAs(_curFileName);
             _excel.Close();
         }
@@ -328,6 +329,25 @@ namespace EasySystemClassification
         {
             OptionsWindow optionsWindow = new OptionsWindow();
             optionsWindow.ShowDialog();
+        }
+
+        private void Exit(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                _optionsHelper = new OptionsHelper("Config.json");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(@"程序没有足够的权限访问或生成配置文件", @"错误");
+                Close();
+            }
+            DetailDisable();
         }
     }
 }

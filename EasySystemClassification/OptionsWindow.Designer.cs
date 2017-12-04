@@ -33,19 +33,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtImportCodeRegex = new System.Windows.Forms.TextBox();
             this.txtImportNameRegex = new System.Windows.Forms.TextBox();
+            this.txtImportStartColumn = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtImportStartRow = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtExportFormat = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtExportStartColumn = new System.Windows.Forms.TextBox();
             this.txtExportStartRow = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEnter = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtImportStartColumn = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtExportStartColumn = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +99,22 @@
             this.txtImportNameRegex.Size = new System.Drawing.Size(107, 21);
             this.txtImportNameRegex.TabIndex = 1;
             // 
+            // txtImportStartColumn
+            // 
+            this.txtImportStartColumn.Location = new System.Drawing.Point(87, 53);
+            this.txtImportStartColumn.Name = "txtImportStartColumn";
+            this.txtImportStartColumn.Size = new System.Drawing.Size(107, 21);
+            this.txtImportStartColumn.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 56);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 12);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "开始列数:";
+            // 
             // txtImportStartRow
             // 
             this.txtImportStartRow.Location = new System.Drawing.Point(87, 23);
@@ -146,12 +162,28 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "导出格式化:";
             // 
+            // txtExportStartColumn
+            // 
+            this.txtExportStartColumn.Location = new System.Drawing.Point(87, 53);
+            this.txtExportStartColumn.Name = "txtExportStartColumn";
+            this.txtExportStartColumn.Size = new System.Drawing.Size(107, 21);
+            this.txtExportStartColumn.TabIndex = 1;
+            // 
             // txtExportStartRow
             // 
             this.txtExportStartRow.Location = new System.Drawing.Point(87, 23);
             this.txtExportStartRow.Name = "txtExportStartRow";
             this.txtExportStartRow.Size = new System.Drawing.Size(107, 21);
             this.txtExportStartRow.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 56);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 12);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "开始行数:";
             // 
             // label5
             // 
@@ -170,6 +202,7 @@
             this.btnEnter.TabIndex = 3;
             this.btnEnter.Text = "确定";
             this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.SaveOption);
             // 
             // btnCancel
             // 
@@ -179,38 +212,7 @@
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 56);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 12);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "开始列数:";
-            // 
-            // txtImportStartColumn
-            // 
-            this.txtImportStartColumn.Location = new System.Drawing.Point(87, 53);
-            this.txtImportStartColumn.Name = "txtImportStartColumn";
-            this.txtImportStartColumn.Size = new System.Drawing.Size(107, 21);
-            this.txtImportStartColumn.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 56);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 12);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "开始行数:";
-            // 
-            // txtExportStartColumn
-            // 
-            this.txtExportStartColumn.Location = new System.Drawing.Point(87, 53);
-            this.txtExportStartColumn.Name = "txtExportStartColumn";
-            this.txtExportStartColumn.Size = new System.Drawing.Size(107, 21);
-            this.txtExportStartColumn.TabIndex = 1;
+            this.btnCancel.Click += new System.EventHandler(this.CloseOption);
             // 
             // OptionsWindow
             // 
@@ -226,6 +228,7 @@
             this.MinimizeBox = false;
             this.Name = "OptionsWindow";
             this.Text = "选项";
+            this.Load += new System.EventHandler(this.OptionsWindow_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

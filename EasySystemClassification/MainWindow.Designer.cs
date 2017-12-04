@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,10 +43,6 @@
             this.miNewBrotherCatalog = new System.Windows.Forms.ToolStripMenuItem();
             this.miUpdateCatalog = new System.Windows.Forms.ToolStripMenuItem();
             this.miDeleteCatalog = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.miMoveCatalog = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.查询SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTool = new System.Windows.Forms.ToolStripMenuItem();
             this.miOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.gbCatalog = new System.Windows.Forms.GroupBox();
@@ -69,11 +66,11 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.gbDetail = new System.Windows.Forms.GroupBox();
+            this.txtWholeCode = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbOperator = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtWholeCode = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.gbCatalog.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -113,46 +110,47 @@
             // miNew
             // 
             this.miNew.Name = "miNew";
-            this.miNew.Size = new System.Drawing.Size(152, 22);
+            this.miNew.Size = new System.Drawing.Size(118, 22);
             this.miNew.Text = "新建(&N)";
             this.miNew.Click += new System.EventHandler(this.NewFile);
             // 
             // miImport
             // 
             this.miImport.Name = "miImport";
-            this.miImport.Size = new System.Drawing.Size(152, 22);
+            this.miImport.Size = new System.Drawing.Size(118, 22);
             this.miImport.Text = "导入(&I)";
             this.miImport.Click += new System.EventHandler(this.ImportFile);
             // 
             // miExport
             // 
             this.miExport.Name = "miExport";
-            this.miExport.Size = new System.Drawing.Size(152, 22);
+            this.miExport.Size = new System.Drawing.Size(118, 22);
             this.miExport.Text = "导出(&O)";
             this.miExport.Click += new System.EventHandler(this.ExportFile);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(115, 6);
             // 
             // miClose
             // 
             this.miClose.Name = "miClose";
-            this.miClose.Size = new System.Drawing.Size(152, 22);
+            this.miClose.Size = new System.Drawing.Size(118, 22);
             this.miClose.Text = "关闭(&C)";
             this.miClose.Click += new System.EventHandler(this.CloseFile);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(115, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(152, 22);
+            this.miExit.Size = new System.Drawing.Size(118, 22);
             this.miExit.Text = "退出(&X)";
+            this.miExit.Click += new System.EventHandler(this.Exit);
             // 
             // mnuEdit
             // 
@@ -160,11 +158,7 @@
             this.miNewChildCatalog,
             this.miNewBrotherCatalog,
             this.miUpdateCatalog,
-            this.miDeleteCatalog,
-            this.toolStripMenuItem3,
-            this.miMoveCatalog,
-            this.toolStripMenuItem4,
-            this.查询SToolStripMenuItem});
+            this.miDeleteCatalog});
             this.mnuEdit.Name = "mnuEdit";
             this.mnuEdit.Size = new System.Drawing.Size(59, 21);
             this.mnuEdit.Text = "编辑(&E)";
@@ -197,28 +191,6 @@
             this.miDeleteCatalog.Text = "删除目录(&D)";
             this.miDeleteCatalog.Click += new System.EventHandler(this.DeleteCatalog);
             // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(161, 6);
-            // 
-            // miMoveCatalog
-            // 
-            this.miMoveCatalog.Name = "miMoveCatalog";
-            this.miMoveCatalog.Size = new System.Drawing.Size(164, 22);
-            this.miMoveCatalog.Text = "移动目录...(&M)";
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(161, 6);
-            // 
-            // 查询SToolStripMenuItem
-            // 
-            this.查询SToolStripMenuItem.Name = "查询SToolStripMenuItem";
-            this.查询SToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.查询SToolStripMenuItem.Text = "搜索(&S)";
-            // 
             // mnuTool
             // 
             this.mnuTool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -230,7 +202,7 @@
             // miOptions
             // 
             this.miOptions.Name = "miOptions";
-            this.miOptions.Size = new System.Drawing.Size(152, 22);
+            this.miOptions.Size = new System.Drawing.Size(118, 22);
             this.miOptions.Text = "选项(&O)";
             this.miOptions.Click += new System.EventHandler(this.OpenOptions);
             // 
@@ -450,6 +422,23 @@
             this.gbDetail.TabStop = false;
             this.gbDetail.Text = "目录详情";
             // 
+            // txtWholeCode
+            // 
+            this.txtWholeCode.Location = new System.Drawing.Point(83, 83);
+            this.txtWholeCode.Name = "txtWholeCode";
+            this.txtWholeCode.ReadOnly = true;
+            this.txtWholeCode.Size = new System.Drawing.Size(173, 21);
+            this.txtWholeCode.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 12);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "总编码:";
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -483,23 +472,6 @@
             this.gbOperator.TabStop = false;
             this.gbOperator.Text = "操作";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 86);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 12);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "总编码:";
-            // 
-            // txtWholeCode
-            // 
-            this.txtWholeCode.Location = new System.Drawing.Point(83, 83);
-            this.txtWholeCode.Name = "txtWholeCode";
-            this.txtWholeCode.ReadOnly = true;
-            this.txtWholeCode.Size = new System.Drawing.Size(173, 21);
-            this.txtWholeCode.TabIndex = 12;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -508,10 +480,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "MainWindow";
             this.Text = "体系分类快速工具";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbCatalog.ResumeLayout(false);
@@ -543,8 +517,6 @@
         private System.Windows.Forms.ToolStripMenuItem miNewChildCatalog;
         private System.Windows.Forms.ToolStripMenuItem miUpdateCatalog;
         private System.Windows.Forms.ToolStripMenuItem miDeleteCatalog;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem miMoveCatalog;
         private System.Windows.Forms.ToolStripMenuItem mnuTool;
         private System.Windows.Forms.ToolStripMenuItem miOptions;
         private System.Windows.Forms.GroupBox gbCatalog;
@@ -553,8 +525,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCatalogName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem 查询SToolStripMenuItem;
         private System.Windows.Forms.TextBox txtCatalogLevel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
