@@ -46,7 +46,7 @@ namespace EasySystemClassification
         {
             try
             {
-                _optionHelper = new OptionsHelper("Configjson");
+                _optionHelper = new OptionsHelper("Config.json");
             }
             catch (Exception)
             {
