@@ -71,6 +71,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbOperator = new System.Windows.Forms.GroupBox();
+            this.picBarCode = new System.Windows.Forms.PictureBox();
+            this.bgwLoad = new System.ComponentModel.BackgroundWorker();
+            this.bgwSave = new System.ComponentModel.BackgroundWorker();
+            this.ssStatus = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             this.gbCatalog.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,6 +83,7 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.gbOperator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBarCode)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -110,45 +115,45 @@
             // miNew
             // 
             this.miNew.Name = "miNew";
-            this.miNew.Size = new System.Drawing.Size(118, 22);
+            this.miNew.Size = new System.Drawing.Size(152, 22);
             this.miNew.Text = "新建(&N)";
             this.miNew.Click += new System.EventHandler(this.NewFile);
             // 
             // miImport
             // 
             this.miImport.Name = "miImport";
-            this.miImport.Size = new System.Drawing.Size(118, 22);
+            this.miImport.Size = new System.Drawing.Size(152, 22);
             this.miImport.Text = "导入(&I)";
             this.miImport.Click += new System.EventHandler(this.ImportFile);
             // 
             // miExport
             // 
             this.miExport.Name = "miExport";
-            this.miExport.Size = new System.Drawing.Size(118, 22);
+            this.miExport.Size = new System.Drawing.Size(152, 22);
             this.miExport.Text = "导出(&O)";
             this.miExport.Click += new System.EventHandler(this.ExportFile);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(115, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // miClose
             // 
             this.miClose.Name = "miClose";
-            this.miClose.Size = new System.Drawing.Size(118, 22);
+            this.miClose.Size = new System.Drawing.Size(152, 22);
             this.miClose.Text = "关闭(&C)";
             this.miClose.Click += new System.EventHandler(this.CloseFile);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(115, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(118, 22);
+            this.miExit.Size = new System.Drawing.Size(152, 22);
             this.miExit.Text = "退出(&X)";
             this.miExit.Click += new System.EventHandler(this.Exit);
             // 
@@ -212,7 +217,7 @@
             this.gbCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCatalog.Location = new System.Drawing.Point(0, 0);
             this.gbCatalog.Name = "gbCatalog";
-            this.gbCatalog.Size = new System.Drawing.Size(712, 521);
+            this.gbCatalog.Size = new System.Drawing.Size(712, 496);
             this.gbCatalog.TabIndex = 1;
             this.gbCatalog.TabStop = false;
             this.gbCatalog.Text = "分类目录";
@@ -222,7 +227,7 @@
             this.trCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trCatalog.Location = new System.Drawing.Point(3, 17);
             this.trCatalog.Name = "trCatalog";
-            this.trCatalog.Size = new System.Drawing.Size(706, 501);
+            this.trCatalog.Size = new System.Drawing.Size(706, 476);
             this.trCatalog.TabIndex = 0;
             this.trCatalog.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CheckCatalog);
             // 
@@ -245,7 +250,7 @@
             // btnDeleteCatalog
             // 
             this.btnDeleteCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeleteCatalog.Location = new System.Drawing.Point(143, 342);
+            this.btnDeleteCatalog.Location = new System.Drawing.Point(143, 326);
             this.btnDeleteCatalog.Name = "btnDeleteCatalog";
             this.btnDeleteCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnDeleteCatalog.TabIndex = 10;
@@ -256,7 +261,7 @@
             // btnNewBrotherCatalog
             // 
             this.btnNewBrotherCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNewBrotherCatalog.Location = new System.Drawing.Point(143, 313);
+            this.btnNewBrotherCatalog.Location = new System.Drawing.Point(143, 297);
             this.btnNewBrotherCatalog.Name = "btnNewBrotherCatalog";
             this.btnNewBrotherCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnNewBrotherCatalog.TabIndex = 9;
@@ -267,7 +272,7 @@
             // btnNewChildCatalog
             // 
             this.btnNewChildCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNewChildCatalog.Location = new System.Drawing.Point(20, 313);
+            this.btnNewChildCatalog.Location = new System.Drawing.Point(20, 297);
             this.btnNewChildCatalog.Name = "btnNewChildCatalog";
             this.btnNewChildCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnNewChildCatalog.TabIndex = 8;
@@ -279,7 +284,7 @@
             // btnUpdateCatalog
             // 
             this.btnUpdateCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUpdateCatalog.Location = new System.Drawing.Point(20, 342);
+            this.btnUpdateCatalog.Location = new System.Drawing.Point(20, 326);
             this.btnUpdateCatalog.Name = "btnUpdateCatalog";
             this.btnUpdateCatalog.Size = new System.Drawing.Size(113, 23);
             this.btnUpdateCatalog.TabIndex = 6;
@@ -401,6 +406,7 @@
             // 
             this.gbDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbDetail.Controls.Add(this.picBarCode);
             this.gbDetail.Controls.Add(this.txtWholeCode);
             this.gbDetail.Controls.Add(this.txtCode);
             this.gbDetail.Controls.Add(this.btnNewChildCatalog);
@@ -417,7 +423,7 @@
             this.gbDetail.Controls.Add(this.txtCatalogLevel);
             this.gbDetail.Location = new System.Drawing.Point(3, 134);
             this.gbDetail.Name = "gbDetail";
-            this.gbDetail.Size = new System.Drawing.Size(283, 384);
+            this.gbDetail.Size = new System.Drawing.Size(283, 359);
             this.gbDetail.TabIndex = 13;
             this.gbDetail.TabStop = false;
             this.gbDetail.Text = "目录详情";
@@ -447,16 +453,17 @@
             this.panel1.Controls.Add(this.gbCatalog);
             this.panel1.Location = new System.Drawing.Point(287, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(712, 521);
+            this.panel1.Size = new System.Drawing.Size(712, 496);
             this.panel1.TabIndex = 3;
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.Controls.Add(this.gbOperator);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(286, 521);
+            this.panel2.Size = new System.Drawing.Size(286, 496);
             this.panel2.TabIndex = 4;
             // 
             // gbOperator
@@ -467,16 +474,35 @@
             this.gbOperator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbOperator.Location = new System.Drawing.Point(0, 0);
             this.gbOperator.Name = "gbOperator";
-            this.gbOperator.Size = new System.Drawing.Size(286, 521);
+            this.gbOperator.Size = new System.Drawing.Size(286, 496);
             this.gbOperator.TabIndex = 1;
             this.gbOperator.TabStop = false;
             this.gbOperator.Text = "操作";
+            // 
+            // picBarCode
+            // 
+            this.picBarCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBarCode.Location = new System.Drawing.Point(20, 184);
+            this.picBarCode.Name = "picBarCode";
+            this.picBarCode.Size = new System.Drawing.Size(236, 98);
+            this.picBarCode.TabIndex = 13;
+            this.picBarCode.TabStop = false;
+            // 
+            // ssStatus
+            // 
+            this.ssStatus.Location = new System.Drawing.Point(0, 524);
+            this.ssStatus.Name = "ssStatus";
+            this.ssStatus.Size = new System.Drawing.Size(999, 22);
+            this.ssStatus.TabIndex = 5;
+            this.ssStatus.Text = "statusStrip1";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 546);
+            this.Controls.Add(this.ssStatus);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -497,6 +523,7 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.gbOperator.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBarCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -546,6 +573,10 @@
         private System.Windows.Forms.GroupBox gbOperator;
         private System.Windows.Forms.TextBox txtWholeCode;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox picBarCode;
+        private System.ComponentModel.BackgroundWorker bgwLoad;
+        private System.ComponentModel.BackgroundWorker bgwSave;
+        private System.Windows.Forms.StatusStrip ssStatus;
     }
 }
 

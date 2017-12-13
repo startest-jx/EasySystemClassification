@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZXing;  
+using ZXing.Common; 
 
 
 namespace EasySystemClassification
@@ -26,9 +28,21 @@ namespace EasySystemClassification
         private string _codeRegex = @"(?<=\$)(\w+)";
         private string _cellFormat = @"%NAME%$%CODE%";
 
+        private readonly BarcodeWriter _writer = null;
+
         public MainWindow()
         {
             InitializeComponent();
+            var options = new EncodingOptions
+            {
+                Width = picBarCode.Width,
+                Height = picBarCode.Height
+            };
+            _writer = new BarcodeWriter
+            {
+                Format = BarcodeFormat.CODE_128,
+                Options = options
+            };
         }
 
         private void ImportData(TreeNodeCollection curTree, long curColumn, long startRow, long endRow)
@@ -62,6 +76,10 @@ namespace EasySystemClassification
                     {
                         curNodeName = Regex.Match(cellString, _nameRegex).Value;
                         curNodeCode = Regex.Match(cellString, _codeRegex).Value;
+                        if (curNodeName.Length == 0)
+                        {
+                            curNodeName = cellString;
+                        }
                     }
                     catch (Exception e)
                     {
@@ -93,7 +111,15 @@ namespace EasySystemClassification
                     nodeRowCount += ExportData(curNode.Nodes, curColumn + 1, startRow);
                 }
                 totalRowCount += nodeRowCount;
-                string exportString = _cellFormat.Replace(@"%NAME%", curNode.Text).Replace(@"%CODE%", curNode.Tag.ToString());
+                string exportString;
+                if (curNode.Tag.ToString().Length == 0)
+                {
+                    exportString = curNode.Text;
+                }
+                else
+                {
+                    exportString= _cellFormat.Replace(@"%NAME%", curNode.Text).Replace(@"%CODE%", curNode.Tag.ToString());
+                }
                 _excel.UniteCells(_curSheet, startRow, curColumn, startRow + nodeRowCount - 1, curColumn);
                 _excel.SetCellValue(_curSheet, startRow, curColumn, exportString);
                 startRow += nodeRowCount;
@@ -135,8 +161,6 @@ namespace EasySystemClassification
             btnNewBrotherCatalog.Enabled = miNewBrotherCatalog.Enabled = true;
             btnUpdateCatalog.Enabled = miUpdateCatalog.Enabled = true;
             btnDeleteCatalog.Enabled = miDeleteCatalog.Enabled = true;
-
-            
         }
 
         private void DetailDisable()
@@ -157,6 +181,36 @@ namespace EasySystemClassification
             btnNewBrotherCatalog.Enabled = miNewBrotherCatalog.Enabled = false;
             btnUpdateCatalog.Enabled = miUpdateCatalog.Enabled = false;
             btnDeleteCatalog.Enabled = miDeleteCatalog.Enabled = false;
+        }
+
+        private void ShowBarCode()
+        {
+            try
+            {
+                Bitmap bitmap = _writer.Write(txtWholeCode.Text);
+                picBarCode.Image = bitmap;
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
+
+        private void RefreshCatalog()
+        {
+            var checkNode = trCatalog.SelectedNode;
+            string nodeName = checkNode.Text;
+            string nodeCode = checkNode.Tag.ToString();
+            int nodeLevel = checkNode.Level;
+            string nodeParent = checkNode.Parent?.Text;
+
+            txtCatalogName.Text = nodeName;
+            txtCode.Text = nodeCode;
+            txtWholeCode.Text = GetNodeWholeCode(checkNode);
+            txtCatalogLevel.Text = nodeLevel.ToString();
+            txtParentCatalog.Text = nodeParent;
+
+            ShowBarCode();
         }
 
         private void NewFile(object sender, EventArgs e)
@@ -222,16 +276,7 @@ namespace EasySystemClassification
             if (checkNode.IsSelected)
             {
                 DetailEnable();
-                string nodeName = checkNode.Text;
-                string nodeCode = checkNode.Tag.ToString();
-                int nodeLevel = checkNode.Level;
-                string nodeParent = checkNode.Parent?.Text;
-
-                txtCatalogName.Text = nodeName;
-                txtCode.Text = nodeCode;
-                txtWholeCode.Text = GetNodeWholeCode(checkNode);
-                txtCatalogLevel.Text = nodeLevel.ToString();
-                txtParentCatalog.Text = nodeParent;
+                RefreshCatalog();
             }
             else
             {
@@ -269,6 +314,8 @@ namespace EasySystemClassification
             if (pNode == null) return;
             pNode.Text = txtCatalogName.Text;
             pNode.Tag = txtCode.Text;
+
+            RefreshCatalog();
         }
 
         private void DeleteCatalog(object sender, EventArgs e)
